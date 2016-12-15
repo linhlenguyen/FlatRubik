@@ -1,14 +1,15 @@
 module Data.Node(
-Colour(..)
-Node(..)
+Node(..),
+newNode
 )
   where
-    data Colour = Red | Green | Blue | Organe | White | Yellow
+    import qualified Graphics.Gloss as Gloss
 
     data Node = Node {
-      colour :: Colour,
-      up :: Node,
-      left :: Node,
-      right :: Node,
-      down :: Node
+      color :: Gloss.Color
+    }
+
+    newNode :: Color -> Node
+    newNode c = Node {
+      color = c
     }
