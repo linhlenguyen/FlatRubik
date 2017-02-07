@@ -1,5 +1,5 @@
 module Control.Transformation(
-Direction(..)
+Direction(..),
 rotate
 )
 where
@@ -37,7 +37,7 @@ where
   rotateHorizontal :: Direction -> Int -> Int -> Rubik -> Rubik
   rotateHorizontal direction side row r = r'
     where traversalList = reOrderList side $ (sideTraversalMap!side)!Horizontal
-          rotationList = if Direction == Right then traversalList else reverse traversalList
+          rotationList = if Direction == Control.Transformation.Right then traversalList else reverse traversalList
           [side1,side2,side3,side4] = map (r!) rotationList
           side1' = swapRow row (getRow row side4) side1
           side2' = swapRow row (getRow row side1) side2
@@ -67,12 +67,10 @@ where
   sideTraversals :: Array.Array Int [Int]
   sideTraversals = array (1,3) [(1,[1,2,6,4]),(2,[1,3,6,5]),(3,[2,3,4,5])]
 
-  sideTraversalMap :: Map Int Map Traversal [Int]
-  sideTraversalMap = Map.fromList [
-  (1, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!2)]),
-  (2, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!3)]),
-  (3, Map.fromList [(Vertical, sideTraversals!2), (Horizontal, sideTraversals!3)]),
-  (4, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!3)]),
-  (5, Map.fromList [(Vertical, sideTraversals!2), (Horizontal, sideTraversals!3)]),
-  (6, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!2)]),
-  ]
+  sideTraversalMap :: Map.Map Int Map.Map Traversal [Int]
+  sideTraversalMap = Map.fromList [(1, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!2)]),
+    (2, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!3)]),
+    (3, Map.fromList [(Vertical, sideTraversals!2), (Horizontal, sideTraversals!3)]),
+    (4, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!3)]),
+    (5, Map.fromList [(Vertical, sideTraversals!2), (Horizontal, sideTraversals!3)]),
+    (6, Map.fromList [(Vertical, sideTraversals!1), (Horizontal, sideTraversals!2)])]

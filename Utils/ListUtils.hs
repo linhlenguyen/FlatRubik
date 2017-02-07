@@ -10,8 +10,8 @@ where
   replace xs rs ys = replace' 0 xs rs ys
 
   replace' :: Int -> [Int] -> [t] -> [t] -> [t]
-  replace' i (x:xs) (r:rs) (y:ys) = if (i == x) then r : replaces (i+1) xs rs ys
-                                                else y : replaces (i+1) (x:xs) (r:rs) ys
+  replace' i (x:xs) (r:rs) (y:ys) = if (i == x) then r : replace' (i+1) xs rs ys
+                                                else y : replace' (i+1) (x:xs) (r:rs) ys
 
   zipL :: [[t]] -> [t] -> [[t]]
   zipL _ [] = []

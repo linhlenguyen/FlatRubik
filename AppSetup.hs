@@ -15,7 +15,7 @@ where
   background = Gloss.white
 
   initialState :: Rubik
-  initialState = newRubik
+  initialState = newRubik 3
 
   fps = 30::Int
 

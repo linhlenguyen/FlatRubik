@@ -1,5 +1,6 @@
 module Control.Control(
-handleEvent
+handleEvent,
+handleKeyPress
 )
 where
   import Graphics.Gloss.Interface.Pure.Game

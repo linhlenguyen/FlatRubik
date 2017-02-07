@@ -12,5 +12,5 @@ where
   faceSize :: Float
   faceSize = undefined
 
-  renderRubik :: World -> Picture
+  renderRubik :: World -> Gloss.Picture
   renderRubik = undefined

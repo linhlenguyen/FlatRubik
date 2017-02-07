@@ -6,9 +6,9 @@ where
   import Data.Rubik
   import Renderer.Renderer
   import Control.Control
-
+  
   update :: Float -> World -> World
   update _ r = r
 
   main :: IO ()
-  main = play window background fps newWorld renderRubik handleEvent update
+  main = play window background fps newWorld renderRubik handleKeyPress update

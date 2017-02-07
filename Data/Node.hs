@@ -9,7 +9,7 @@ newNode
       color :: Gloss.Color
     }
 
-    newNode :: Color -> Node
+    newNode :: Gloss.Color -> Node
     newNode c = Node {
       color = c
     }

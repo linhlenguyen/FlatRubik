@@ -1,4 +1,5 @@
-module Rubik(
+module Data.Rubik(
+Rubik,
 newRubik
 )
 where
@@ -10,7 +11,7 @@ where
   colors :: [Gloss.Color]
   colors = [Gloss.red, Gloss.green, Gloss.blue, Gloss.yellow, Gloss.rose, Gloss.violet]
 
-  type Rubik = Map.Map Int [[Gloss.Color]]
+  type Rubik = Map.Map Int [Gloss.Color]
 
   newRubik :: Int -> Rubik
   newRubik dimension = Map.fromList $ zip [1..6] $ map toArray colors
