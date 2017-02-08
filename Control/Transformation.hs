@@ -10,10 +10,38 @@ where
 
   --Notes
   --Another potential solutions to rotation transformation
-  --Given a Rubik cube, there are only 9 possible moves that can be made
+  --Given a 3x3 Rubik cube, there are only 9 possible moves that can be made
+  --For nxn cube, there are 3n possible moves
   --The cube can be modelled in an array and the change of state can be hard coded
   --This will also make searching for solution easier,
   --However it'll be more difficult to scale the dimension of the cube
+
+  --Given a Rubik
+
+  --    [6]
+  --    [4]
+  --[5] [1] [3]
+  --    [2]
+
+  --4 Direction of rotation are Up, Down, Left, Right
+  --3 Traversal path are
+  -- 1 - 3 - 6 - 5 (p1)
+  -- 1 - 2 - 6 - 4 (p2)
+  -- 2 - 3 - 4 - 5 (p3)
+
+  --On each side there are 2 possible paths of traversal
+  --1 -> p1 & p2
+  --3 -> p2 & p3
+
+  --On each side selected node have *row* and *column* indexes
+
+  --If the Rubik is stored in the following format.
+  --(1, [R, R, R, R, R, R, R, R])
+  --(2, [G, G, G, G, G, G, G, G])
+  --(3, [B, B, B, B, B, B, B, B])
+  --(4, [Y, Y, Y, Y, Y, Y, Y, Y])
+  --(5, [O, O, O, O, O, O, O, O])
+  --(6, [W, W, W, W, W, W, W, W])
 
   data Direction = Clockwise | CounterClockwise | Up | Down | Left | Right deriving (Show, Eq)
 
