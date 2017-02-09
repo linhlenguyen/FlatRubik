@@ -43,6 +43,14 @@ where
   --(5, [O, O, O, O, O, O, O, O])
   --(6, [W, W, W, W, W, W, W, W])
 
+  --If a 6 sided Rubik is model as 4x4 set of sides as followed
+  -- [3] [6] [5] [1]
+  -- [] [4] [] [2]
+  -- [5] [1] [3] [6]
+  -- [] [2] [] [4]
+
+  --
+
   data Direction = Clockwise | CounterClockwise | Up | Down | Left | Right deriving (Show, Eq)
 
   rotate :: Direction -> Int -> Int -> Int -> Rubik -> Rubik
@@ -54,13 +62,15 @@ where
   rotateVertical :: Direction -> Int -> Int -> Rubik -> Rubik
   rotateVertical direction side column r = r'
     where traversalList = reOrderList side $ (sideTraversalMap!side)!Vertical
-          rotationList = if Direction == Up then traversalList else reverse traversalList
+          rotationSides = []
+          shiftList = if Direction == Up then traversalList else reverse traversalList
           [side1,side2,side3,side4] = map (r!) rotationList
           side1' = swapColumn column (getColumn column side4) side1
           side2' = swapColumn column (getColumn column side1) side2
           side3' = swapColumn column (getColumn column side2) side3
           side4' = swapColumn column (getColumn column side3) side4
-          r' = Map.fromList $ zip rotationList [side1',side2',side3',side4']
+          newM = zip shiftList [side1', side2', side3', side4']
+          r' = Map.union r newM
 
   rotateHorizontal :: Direction -> Int -> Int -> Rubik -> Rubik
   rotateHorizontal direction side row r = r'
@@ -81,13 +91,13 @@ where
   swapRow row r rs = replace 0 row r rs
 
   swapColumn :: Int -> [t] -> [[t]] -> [[t]]
-  swapColumn column xs r = rotateFace CounterClockwise $ replace 0 column r $ rotateFace Clockwise r
+  swapColumn column xs r = rotateSide CounterClockwise $ replace 0 column r $ rotateFace Clockwise r
 
   getRow :: Int -> [[t]] -> [t]
   getRow row r = r!!row
 
   getColumn :: Int -> [[t]] -> [t]
-  getColumn column r = (rotateFace Clockwise r)!!column
+  getColumn column r = (rotateSide Clockwise r)!!column
 
   data Traversal = Vertical | Horizontal
 
